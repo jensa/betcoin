@@ -42,7 +42,7 @@ Template.listBets.events ({
   	var userBet = UserBets.find({uid:Meteor.user()._id, betId:bet._id});
   	//if return value is good, don't insert anything....
   	console.log(userBet);
-  		//UserBets.insert ({optionName:optionName, amount:10, uid:Meteor.user()._id, betId:bet._id});
+  	UserBets.insert ({optionName:optionName, amount:10, uid:Meteor.user()._id, betId:bet._id, created_at: Date.now()});
   }
 });
 
