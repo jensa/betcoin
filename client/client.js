@@ -8,7 +8,7 @@ Template.start.events({
     if (typeof console !== 'undefined')
       console.log("You pressed the button");
   },
-  'click input[type=button]' : function () {
+  'click input#addBet' : function () {
   	console.log ("adds bet");
   	var text = $("#text").val ();
   	var option1 = $("#option1").val ();
