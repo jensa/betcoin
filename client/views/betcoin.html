@@ -17,6 +17,9 @@
 					{{#if show "listBets"}}
 						{{> listBets}}
 					{{/if}}
+					{{#if show "profile"}}
+						{{> profile}}
+					{{/if}}
 				</div>
 
 				<div class="large-4 columns">
@@ -43,6 +46,7 @@
 	      <li>{{ loginButtons}}</li>
 	      <li><a href="#" id="showCreateBet">New bet</a></li>
 	      <li><a href="#" id="showListOfBets">List bets</a></li>
+	      <li><a href="#" id="showProfile">Profile</a></li>
 	    </ul>
 	  </section>
 	</div> 
@@ -73,15 +77,4 @@
 			<input type="text" id="option2">
 	    <input type="button" id="addBet" value="Add bet" />
 	<form>
-</template>
-
-<template name="userList">
-	<h4>List of users</h4>
-	<ul>
-    {{#each users}}
-      <li>
-        <a href="#">{{ profile.email }}</a> (<strong>{{ profile.betcoins}}</strong>)
-      </li>
-		{{/each}}
-	</ul>
 </template>

@@ -1,0 +1,10 @@
+<template name="userList">
+	<h4>List of users</h4>
+	<ul>
+    {{#each users}}
+      <li>
+        <a href="#">{{ profile.email }}</a> (<strong>{{ profile.betcoins}}</strong>)
+      </li>
+		{{/each}}
+	</ul>
+</template>

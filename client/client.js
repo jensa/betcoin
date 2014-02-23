@@ -8,6 +8,9 @@ Template.header.events( {
   },
   'click #showListOfBets' : function() {
     Session.set('view', 'listBets');
+  },
+  'click #showProfile' : function() {
+    Session.set('view', 'profile');
   }
 });
 
