@@ -22,18 +22,22 @@ Template.listBets.bets = function (){
 }
 
 Template.start.events({
-  'click input' : function () {
-    // template data, if any, is available in 'this'
-    if (typeof console !== 'undefined')
-      console.log("You pressed the button");
-  },
   'click input#addBet' : function () {
-  	console.log ("adds bet");
+  	console.log ("adding bet");
   	var text = $("#text").val ();
   	var option1 = $("#option1").val ();
   	var option2 = $("#option2").val ();
   	var options = [{text:option1}, {text:option2}];
   	Bets.insert({text:text, options:options});
+  }
+});
+
+Template.listBets.events ({
+	'click input#placeBet' : function (event) {
+  	console.log ("placing bet");
+  	var parent = $(event.currentTarget).parent ();
+  	var betId = $(parent).find ("#betId").val ();
+  	console.log (betId);
   }
 });
 
