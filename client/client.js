@@ -32,16 +32,30 @@ Template.header.events( {
 
 Template.listBets.bets = function (){
   return Bets.find();
+
 }
 
 Template.start.events({
-  'click input#addBet' : function () {
+  'click #addBet' : function (e, t) {
+    e.preventDefault();
+    var attrs = {
+            text: t.find('[name="text"]').value,
+            options: [
+              {
+                text: t.find('[name="option1"]').value
+              },
+              {
+                text: t.find('[name="option2"]').value
+              }
+            ]
+        };
     console.log ("adding bet");
-    var text = $("#text").val ();
-    var option1 = $("#option1").val ();
-    var option2 = $("#option2").val ();
-    var options = [{text:option1}, {text:option2}];
-    Bets.insert({text:text, options:options});
+    console.log(attrs);
+    // var text = $("#text").val ();
+    // var option1 = $("#option1").val ();
+    // var option2 = $("#option2").val ();
+    // var options = [{text:option1}, {text:option2}];
+    Bets.insert(attrs);
   }
 });
 
