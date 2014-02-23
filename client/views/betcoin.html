@@ -27,14 +27,21 @@
 	</div>
 
 	{{loginButtons}}
-  {{> hello }}
+
+  {{> start }}
 </body>
 
-<template name="hello">
+<template name="start">
 	<div class="row">
 		<div class="large-12 columns">
-		  <h1>Hello World!</h1>
-		  {{greeting}}
+		 	{{#each bets}}
+  				<h1>{{text}}</h1>
+  				<h2>
+  				{{#each options}}
+  					{{text}}
+  				{{/each}}
+  				</h2>
+  			{{/each}}
 		  <input type="button" value="Click" />
 	  </div>
   </div>
