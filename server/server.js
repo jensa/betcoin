@@ -12,29 +12,31 @@ Meteor.startup(function () {
 
   Accounts.onCreateUser(function (options, user) {
   	if (user.services.facebook == undefined) {
-  		return user;
-  	}
-	  var accessToken = user.services.facebook.accessToken,
-	      result,
-	      profile;
+      var profile = {};
 
-	  result = Meteor.http.get("https://graph.facebook.com/me", {
-	    params: {
-	      access_token: accessToken
-	    }
-	  });
+      profile.email = user.emails[0].address;
+      user.profile = profile;
+    } else {
 
-		console.log(result);
-	  if (result.error)
-	    throw result.error;
+      var accessToken = user.services.facebook.accessToken,
+          result,
+          profile;
 
-	  profile = _.pick(result.data,
-	    "name", "id", "email"
-	    );
+      result = Meteor.http.get("https://graph.facebook.com/me", {
+        params: {
+          access_token: accessToken
+        }
+      });
 
-	  console.log("profile");
-	  console.log(profile);
-	  user.profile = profile;
+      if (result.error)
+        throw result.error;
+
+      profile = _.pick(result.data,
+        "name", "id", "email"
+        );
+
+      user.profile = profile;
+    }
 
 	  return user;
 	});

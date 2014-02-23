@@ -16,5 +16,6 @@ Template.start.events({
 });
 
 Template.userList.users = function() {
-  return Users.find();
+  console.log(Users.find().fetch())
+  return Users.find().fetch();
 }
