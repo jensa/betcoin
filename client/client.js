@@ -33,11 +33,16 @@ Template.start.events({
 });
 
 Template.listBets.events ({
-	'click input#placeBet' : function (event) {
+	'click input.placeBet' : function (event) {
   	console.log ("placing bet");
+  	var optionName = $(event.currentTarget).val ();
   	var parent = $(event.currentTarget).parent ();
   	var betId = $(parent).find ("#betId").val ();
-  	console.log (betId);
+  	var bet = Bets.findOne({_id:betId});
+  	var userBet = UserBets.find({uid:Meteor.user()._id, betId:bet._id});
+  	//if return value is good, don't insert anything....
+  	console.log(userBet);
+  		//UserBets.insert ({optionName:optionName, amount:10, uid:Meteor.user()._id, betId:bet._id});
   }
 });
 
