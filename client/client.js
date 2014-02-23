@@ -39,23 +39,18 @@ Template.start.events({
   'click #addBet' : function (e, t) {
     e.preventDefault();
     var attrs = {
-            text: t.find('[name="text"]').value,
-            options: [
-              {
-                text: t.find('[name="option1"]').value
-              },
-              {
-                text: t.find('[name="option2"]').value
-              }
-            ]
-        };
-    console.log ("adding bet");
-    console.log(attrs);
-    // var text = $("#text").val ();
-    // var option1 = $("#option1").val ();
-    // var option2 = $("#option2").val ();
-    // var options = [{text:option1}, {text:option2}];
+      text: t.find('[name="text"]').value,
+      options: [
+        {
+          text: t.find('[name="option1"]').value
+        },
+        {
+          text: t.find('[name="option2"]').value
+        }
+      ]
+    };
     Bets.insert(attrs);
+    Session.set('view', 'listBets');
   }
 });
 
@@ -74,4 +69,4 @@ Template.listBets.events ({
 Template.userList.users = function() {
   console.log(Users.find().fetch())
   return Users.find().fetch();
-}
+};
