@@ -11,6 +11,9 @@ Meteor.startup(function () {
   });
 
   Accounts.onCreateUser(function (options, user) {
+  	if (user.services.facebook == undefined) {
+  		return user;
+  	}
 	  var accessToken = user.services.facebook.accessToken,
 	      result,
 	      profile;
