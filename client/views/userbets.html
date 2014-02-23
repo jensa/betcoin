@@ -1,0 +1,12 @@
+<template name="userBets">
+	<div>
+		<h3>
+			Current User bets
+		</h3>
+		<ul>
+			{{#each userBets}}
+				<li>{{ amount }}</li>
+			{{/each}}
+		</ul>
+	</div>
+</template>
