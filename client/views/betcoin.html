@@ -3,6 +3,31 @@
 </head>
 
 <body>
+	{{> header }}
+	
+	<div class="row">
+		<div class="large-12 columns">
+
+			<div class="row">
+				<div class="large-8 columns">
+					{{#if show "createBet"}}
+						{{> start}}
+					{{/if}}
+					
+					{{#if show "listBets"}}
+						{{> listBets}}
+					{{/if}}
+				</div>
+
+				<div class="large-4 columns">
+		  	{{> userList}}
+			  </div>
+			</div>
+		</div>
+	</div>
+</body>
+
+<template name="header">
 	<nav class="top-bar" data-topbar>
 		<ul class="title-area">
 			<li class="name">
@@ -16,42 +41,38 @@
 	    </ul>
 	    <ul class="left">
 	      <li>{{ loginButtons}}</li>
+	      <li><a href="#" id="showCreateBet">New bet</a></li>
+	      <li><a href="#" id="showListOfBets">List bets</a></li>
 	    </ul>
 	  </section>
 	</div> 
-	<div class="row">
-		<div class="large-12 columns">
-	  	{{> start }}
-		</div>
-	</div>
-</body>
+</template>
+
+<template name="listBets">
+	<h3>List bets</h3>
+  {{#each bets}}
+  <div class="row">
+    <div class="large-11 columns">
+      <h1>{{text}}</h1>
+        <h4>
+          {{#each options}}
+            {{text}}
+          {{/each}}
+        </h4>
+      </div>
+    </div>
+  </div>
+	{{/each}}
+</template>
 
 <template name="start">
-	<div class="row">
-		<div class="large-8 columns">
-      {{#each bets}}
-      <div class="row">
-        <div class="large-11 columns">
-          <h1>{{text}}</h1>
-            <h4>
-              {{#each options}}
-                {{text}}
-              {{/each}}
-            </h4>
-          </div>
-        </div>
-  			{{/each}}
-  			<form>
-  				<input type="text" id="text">
-  				<input type="text" id="option1">
-  				<input type="text" id="option2">
-          <input type="button" id="addBet" value="Add bet" />
-		  <form>
-	  </div>
-	  <div class="large-4 columns">
-	  	{{> userList}}
-	  </div>
-  </div>
+	<h3>Create a new betting pool</h3>
+		<form>
+			<input type="text" id="text">
+			<input type="text" id="option1">
+			<input type="text" id="option2">
+	    <input type="button" id="addBet" value="Add bet" />
+	<form>
 </template>
 
 <template name="userList">

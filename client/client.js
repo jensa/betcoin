@@ -1,4 +1,17 @@
-Template.start.bets = function (){
+Handlebars.registerHelper('show',function(input){
+  return Session.get('view') == input;
+});
+
+Template.header.events( {
+  'click #showCreateBet' : function() {
+    Session.set('view', 'createBet');
+  },
+  'click #showListOfBets' : function() {
+    Session.set('view', 'listBets');
+  }
+});
+
+Template.listBets.bets = function (){
 	return Bets.find();
 }
 
