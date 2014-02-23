@@ -19,12 +19,16 @@
 	    </ul>
 	  </section>
 	</div>
-  {{> start }}
+	<div class="row">
+		<div class="large-12 columns">
+	  	{{> start }}
+		</div>
+	</div>
 </body>
 
 <template name="start">
 	<div class="row">
-		<div class="large-12 columns">
+		<div class="large-6 columns">
 		 	{{#each bets}}
   				<h1>{{text}}</h1>
   				<h2>
@@ -40,6 +44,17 @@
 		  		<input type="submit" id="addBet" value="Add bet" />
 		  <form>
 	  </div>
+	  <div class="large-6 columns">
+	  	{{> userList}}
+	  </div>
   </div>
 </template>
 
+<template name="userList">
+	<h4>List of users</h4>
+	<ul>
+		{{#each users}}
+			{{ email }}
+		{{/each}}
+	</ul>
+</template>

@@ -1,5 +1,6 @@
 Template.start.bets = function (){
-	return Bets.find({"users.userId":Meteor.user().profile.id});
+	return Bets.find();
+  //return Bets.find({"users.userId":Meteor.user().profile.id});
 }
 
 Template.start.events({
@@ -13,3 +14,7 @@ Template.start.events({
   	Bets.insert({text:text, options:options, users:[Meteor.user().profile.id]});
   }
 });
+
+Template.userList.users = function() {
+  return Users.find();
+}
