@@ -13,6 +13,7 @@ Meteor.startup(function () {
   Accounts.onCreateUser(function (options, user) {
   	if (user.services.facebook == undefined) {
       var profile = {};
+      profile.betcoins = 100;
 
       profile.email = user.emails[0].address;
       user.profile = profile;
@@ -34,6 +35,8 @@ Meteor.startup(function () {
       profile = _.pick(result.data,
         "name", "id", "email"
         );
+
+      profile.betcoins = 1000;
 
       user.profile = profile;
     }
