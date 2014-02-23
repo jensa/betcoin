@@ -59,9 +59,10 @@
     <div class="large-11 columns">
       <h1>{{text}}</h1>
         <h4>
-          {{#each options}}
-            {{text}}
-          {{/each}}
+          <input style="display:none" id="betId" value="{{_id}}">
+  					{{#each options}}
+  						<input type="button" id="placeBet" value="{{text}}">
+          	{{/each}}
         </h4>
       </div>
     </div>
