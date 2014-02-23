@@ -1,1 +1,6 @@
 /* CSS declarations go here */
+
+.accounts-dialog {
+	background: #333;
+	color: white;
+}
