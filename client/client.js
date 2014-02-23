@@ -5,6 +5,19 @@ Handlebars.registerHelper('show',function(input){
   return Session.get('view') == input;
 });
 
+Handlebars.registerHelper('activeTab',function(input){
+  console.log("handle bars helper");
+  if (input == 'listBets' && Session.get('view') == undefined) {
+    console.log("input");
+    return "active";
+  } else if (Session.get('view') == input) {
+    console.log("view");
+    console.log(Session.get('view'));
+    return "active";
+  }
+  return "not_active";
+});
+
 Template.header.events( {
   'click #showCreateBet' : function() {
     Session.set('view', 'createBet');

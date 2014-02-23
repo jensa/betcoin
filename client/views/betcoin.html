@@ -31,28 +31,6 @@
 	</div>
 </body>
 
-<template name="header">
-	<nav class="top-bar" data-topbar>
-		<ul class="title-area">
-			<li class="name">
-				<h1><a href="#">Betcoins</a></h1>
-			</li>
-			<li class="toggle-topbar menu-icon"><a href="#">Menu</a></li>
-		</ul>
-		<section class="top-bar-section">
-	    <ul class="right">
-	      <li class="active"><a href="#">Right Button Active</a></li>
-	    </ul>
-	    <ul class="left">
-	      <li>{{ loginButtons}}</li>
-	      <li><a href="#" id="showCreateBet">New bet</a></li>
-	      <li><a href="#" id="showListOfBets">List bets</a></li>
-	      <li><a href="#" id="showProfile">Profile</a></li>
-	    </ul>
-	  </section>
-	</div> 
-</template>
-
 <template name="listBets">
 	<h3>List bets</h3>
   {{#each bets}}
