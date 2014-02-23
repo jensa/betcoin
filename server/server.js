@@ -11,7 +11,7 @@ Meteor.startup(function () {
   });
 
   Accounts.onCreateUser(function (options, user) {
-  	if (user.services.facebook == undefined) {
+    if (user.services.facebook == undefined) {
       var profile = {};
       profile.betcoins = 100;
 
@@ -41,6 +41,21 @@ Meteor.startup(function () {
       user.profile = profile;
     }
 
-	  return user;
-	});
+    return user;
+  });
+});
+
+Meteor.methods({
+  'placeBet' : function(uid, betId, optionName) {
+    var userBet = UserBets.findOne({uid:Meteor.user()._id, betId:betId});
+
+    if (userBet) {
+      userBet.optionName = optionName;
+      console.log(userBet);
+      UserBets.update({_id:userBet._id}, {$set:{optionName: optionName}});
+    } else {
+      var bet = Bets.findOne({_id:betId});
+      UserBets.insert ({optionName:optionName, amount:10, uid:Meteor.user()._id, betId:bet._id, bet_text: bet.text ,created_at: Date.now()});
+    }
+  }
 });

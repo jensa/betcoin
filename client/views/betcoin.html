@@ -56,18 +56,26 @@
 <template name="listBets">
 	<h3>List bets</h3>
   {{#each bets}}
-  <div class="row">
-    <div class="large-11 columns">
-      <h1>{{text}}</h1>
-        <h4>
-          <input style="display:none" id="betId" value="{{_id}}">
-  					{{#each options}}
-  						<input type="button" class="placeBet" value="{{text}}">
-          	{{/each}}
-        </h4>
-      </div>
+	  <div class="row">
+	    <div class="large-11 columns">
+	    	<div class="bet">
+	    		<strong>Bet on:</strong>
+		      <span>{{text}}</span>
+	        <div>
+	          <input style="display:none" id="betId" value="{{_id}}">
+	          <span>Place your bet:</span>
+	          <span>{{ amount }} B's</span>
+	          <ul class="button-group">
+							{{#each options}}
+								<li>
+									<a type="button" class="button tiny placeBet">{{text}}</a>
+								</li>
+		        	{{/each}}
+	        	</ul>
+	        </div>
+        </div>
+    	</div>
     </div>
-  </div>
 	{{/each}}
 </template>
 

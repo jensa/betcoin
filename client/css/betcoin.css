@@ -4,3 +4,12 @@
 	background: #333;
 	color: white;
 }
+
+.bet {
+	padding: 10px;
+	border-bottom: 1px solid #eee;
+}
+
+input.placeBet {
+	color: black;
+}
