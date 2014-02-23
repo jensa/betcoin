@@ -1,4 +1,7 @@
 Handlebars.registerHelper('show',function(input){
+  if (input == 'listBets' && Session.get('view') == undefined) {
+    return true;
+  }
   return Session.get('view') == input;
 });
 
