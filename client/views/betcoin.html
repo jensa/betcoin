@@ -3,11 +3,17 @@
 </head>
 
 <body>
-  {{> hello}}
+  {{> start}}
 </body>
 
-<template name="hello">
-  <h1>Hello World!</h1>
-  {{greeting}}
-  <input type="button" value="Click" />
+<template name="start">
+  {{#each bets}}
+  	<h1>{{text}}</h1>
+  	<h2>
+  	{{#each options}}
+  		{{text}}
+  	{{/each}}
+  	</h2>
+  {{/each}}
+  <input type="button" value="Balle" />
 </template>
