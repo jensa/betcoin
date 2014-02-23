@@ -80,11 +80,30 @@
 </template>
 
 <template name="start">
-	<h3>Create a new betting pool</h3>
-		<form>
-			<input type="text" id="text">
-			<input type="text" id="option1">
-			<input type="text" id="option2">
-	    <input type="button" id="addBet" value="Add bet" />
+	<h3>Create a new betting pool!</h3>
+	<form>
+		<div class="row">
+			<div class="large-12 columns">
+				<label>
+					What do you want to bet on?
+					<input type="text" id="text" placeholder="Which country will be first to land on mars?">
+				</label>
+			</div>
+		</div>
+		<div class="row">
+			<div class="large-6 columns">
+				<label>
+					Either
+					<input type="text" id="option1" placeholder="China">
+				</label>
+			</div>
+			<div class="large-6 columns">
+				<label>
+					Or
+					<input type="text" id="text" placeholder="Christian Augustinson">
+				</label>
+			</div>
+		</div>
+    <input type="button" id="addBet" class="button" value="Publish the bet" />
 	<form>
 </template>

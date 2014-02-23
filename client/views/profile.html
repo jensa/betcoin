@@ -4,4 +4,17 @@
 	<h5>
 		You have {{betcoins}}!!
 	</h5>
+
+	{{> betsForUser}}
+</template>
+
+<template name="betsForUser">
+	<h3>All bets made by this user</h3>
+
+	<ul class="no-bullet">
+	{{#each bets}}
+		<li>{{_id}}</li>
+	{{/each}}
+	</ul>
+
 </template>
