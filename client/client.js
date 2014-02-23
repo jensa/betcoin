@@ -1,6 +1,5 @@
 Template.start.bets = function (){
 	return Bets.find();
-  //return Bets.find({"users.userId":Meteor.user().profile.id});
 }
 
 Template.start.events({
@@ -8,10 +7,14 @@ Template.start.events({
     // template data, if any, is available in 'this'
     if (typeof console !== 'undefined')
       console.log("You pressed the button");
-  	console.log(Meteor.user().profile.id);
   },
-  'click #addBet' : function () {
-  	Bets.insert({text:text, options:options, users:[Meteor.user().profile.id]});
+  'click input[type=button]' : function () {
+  	console.log ("adds bet");
+  	var text = $("#text").val ();
+  	var option1 = $("#option1").val ();
+  	var option2 = $("#option2").val ();
+  	var options = [{text:option1}, {text:option2}];
+  	Bets.insert({text:text, options:options});
   }
 });
 
