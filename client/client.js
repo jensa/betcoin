@@ -1,3 +1,5 @@
+// Handlebar helpers
+
 Handlebars.registerHelper('show',function(input){
   if (input == 'listBets' && Session.get('view') == undefined) {
     return true;
@@ -17,6 +19,8 @@ Handlebars.registerHelper('activeTab',function(input){
   }
   return "not_active";
 });
+
+// Templates.
 
 Template.header.events( {
   'click #showCreateBet' : function() {
@@ -55,11 +59,11 @@ Template.start.events({
 });
 
 Template.listBets.events ({
-  'click input.placeBet' : function (event) {
-    console.log ("placing bet");
-    var optionName = $(event.currentTarget).val ();
-    var parent = $(event.currentTarget).parent ();
-    var betId = $(parent).find ("#betId").val ();
+  'click .placeBet' : function (event) {
+    var parent = $($($(event.currentTarget).parent()).parent()).parent();
+    var betId = $(parent).find("#betId").val ();
+    var optionName = $(event.currentTarget).data('option');
+    console.log(optionName);
     var bet = Bets.findOne({_id:betId});
 
     Meteor.call("placeBet", Meteor.user()._id, betId, optionName);

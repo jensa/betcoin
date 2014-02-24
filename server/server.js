@@ -48,6 +48,7 @@ Meteor.startup(function () {
 Meteor.methods({
   'placeBet' : function(uid, betId, optionName) {
     var userBet = UserBets.findOne({uid:Meteor.user()._id, betId:betId});
+    var bet = Bets.findOne({_id:betId});
 
     if (userBet) {
       userBet.optionName = optionName;
@@ -55,7 +56,7 @@ Meteor.methods({
       UserBets.update({_id:userBet._id}, {$set:{optionName: optionName}});
     } else {
       var bet = Bets.findOne({_id:betId});
-      UserBets.insert ({optionName:optionName, amount:10, uid:Meteor.user()._id, betId:bet._id, bet_text: bet.text ,created_at: Date.now()});
+      UserBets.insert ({optionName:optionName, amount:10, uid:Meteor.user()._id, betId:betId, bet_text: bet.text ,created_at: Date.now()});
     }
   }
 });
