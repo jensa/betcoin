@@ -9,11 +9,14 @@
 </template>
 
 <template name="betsForUser">
-	<h3>All bets made by this user</h3>
+	<h3>All bets created by this user</h3>
 
 	<ul class="no-bullet">
 	{{#each bets}}
-		<li>{{_id}}</li>
+		<li><b>{{text}}</b>: choose option to close bet: </li>
+		{{#each options}}
+				<a type="button" class="button tiny closeBet" data-betid="{{../_id}}" data-option="{{text}}">{{text}}</a>
+		{{/each}}
 	{{/each}}
 	</ul>
 

@@ -40,18 +40,17 @@
 	    		<strong>Bet on:</strong>
 		      <span>{{text}}</span>
 	        <div>
-	          <input style="display:none" id="betId" value="{{_id}}">
 	          <span>Place your bet:</span>
 	          <span>{{ amount }} B's</span>
 	          <ul class="button-group">
 	          	{{#ifMadeBet _id}}
 									<li>
-                  	<a type="button" class="button tiny placeBet" id="markedAsPlaced" data-option="{{text}}">{{text}}</a>
+                  	<a type="button" class="button tiny placeBet" id="placed" data-betid="{{../_id}}" data-option="{{text}}">{{text}}</a>
 									</li>
 							{{else}}
 							{{#each options}}
 								<li>
-                  	<a type="button" class=" button tiny placeBet" data-option="{{text}}">{{text}}</a>
+                  	<a type="button" class=" button tiny placeBet" data-betid="{{../_id}}"data-option="{{text}}">{{text}}</a>
 								</li>
 							{{/each}}
 		        	{{/ifMadeBet}}
@@ -88,6 +87,14 @@
 				<label>
 					Or
 					<input type="text" type="text" name="option2" placeholder="Christian Augustinson">
+				</label>
+			</div>
+		</div>
+		<div class="row">
+			<div class="large-12 columns">
+				<label>
+					For how many coinz?
+					<input type="number" name="amount" value="10">
 				</label>
 			</div>
 		</div>

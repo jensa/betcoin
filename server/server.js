@@ -56,7 +56,35 @@ Meteor.methods({
       UserBets.update({_id:userBet._id}, {$set:{optionName: optionName}});
     } else {
       var bet = Bets.findOne({_id:betId});
-      UserBets.insert ({optionName:optionName, amount:10, uid:Meteor.user()._id, betId:betId, bet_text: bet.text ,created_at: Date.now()});
+      UserBets.insert ({optionName:optionName, amount:bet.amount, uid:Meteor.user()._id, betId:betId, bet_text: bet.text ,created_at: Date.now()});
     }
+  },
+
+  'closeBet' : function(uid, betId, optionName){
+    var failedBets = UserBets.find({betId:betId, optionName:{ $ne:optionName}}).fetch();
+    var successBets = UserBets.find({betId:betId, optionName:optionName}).fetch();
+    var total = 0;
+    for (var i = failedBets.length - 1; i >= 0; i--) {
+      modifyby (failedBets[i].uid, -failedBets[i].amount);
+      total +=failedBets[i].amount;
+    };
+    var toEachWinner = 0;
+    if(successBets.length > 0 && failedBets.length > 0)
+      toEachWinner = total / successBets.length;
+    for (var i = successBets.length - 1; i >= 0; i--) {
+      modifyby(bet.uid, parseFloat(successBets[i].amount) + toEachWinner)
+    };
+    Bets.update ({_id:betId}, {$set:{open:false, closed:optionName}});
+  },
+
+  'addBet' : function(attrs){
+    Bets.insert(attrs);
   }
 });
+
+var modifyby = function(uid, amount){
+  var user = Users.findOne({_id:uid});
+  var current = parseFloat(user.profile.betcoins);
+  var newAmount = current + parseFloat(amount);
+  Users.update({_id:uid}, {$set:{'profile.betcoins': newAmount}});
+}

@@ -34,8 +34,12 @@ Template.header.events( {
   }
 });
 
+Template.betsForUser.bets = function (){
+  return Bets.find({createdBy:Meteor.user()._id});
+}
+
 Template.listBets.bets = function (){
-  return Bets.find().fetch().reverse();
+  return Bets.find({open:true}).fetch().reverse();
 }
 
 Template.listBets.ifMadeBet = function (id, options){
@@ -53,6 +57,9 @@ Template.listBets.ifMadeBet = function (id, options){
 Template.start.events({
   'click #addBet' : function (e, t) {
     e.preventDefault();
+    var amount = t.find('[name=amount]').value;
+    if(!isNumber(amount))
+      amount = 0;
     var attrs = {
       text: t.find('[name="text"]').value,
       options: [
@@ -62,22 +69,37 @@ Template.start.events({
         {
           text: t.find('[name="option2"]').value
         }
-      ]
+      ],
+      amount:amount,
+      createdBy:Meteor.user()._id,
+      open:true
     };
-    Bets.insert(attrs);
+    Meteor.call("addBet", attrs);
     Session.set('view', 'listBets');
   }
 });
 
+function isNumber(n) {
+  return !isNaN(parseFloat(n)) && isFinite(n);
+}
+
 Template.listBets.events ({
   'click .placeBet' : function (event) {
-    var parent = $($($(event.currentTarget).parent()).parent()).parent();
-    var betId = $(parent).find("#betId").val ();
+    var betId = $(event.currentTarget).data('betid');
+    var optionName = $(event.currentTarget).data('option');
+    var bet = Bets.findOne({_id:betId});
+    Meteor.call("placeBet", Meteor.user()._id, betId, optionName);
+  }
+});
+
+Template.betsForUser.events({
+  'click .closeBet' : function (event) {
+    var betId = $(event.currentTarget).data('betid');
     var optionName = $(event.currentTarget).data('option');
     console.log(optionName);
     var bet = Bets.findOne({_id:betId});
 
-    Meteor.call("placeBet", Meteor.user()._id, betId, optionName);
+    Meteor.call("closeBet", Meteor.user()._id, betId, optionName);
   }
 });
 
