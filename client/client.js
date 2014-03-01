@@ -35,8 +35,19 @@ Template.header.events( {
 });
 
 Template.listBets.bets = function (){
-  return Bets.find();
+  return Bets.find().fetch().reverse();
+}
 
+Template.listBets.ifMadeBet = function (id, options){
+  var madeBet = UserBets.findOne({betId:id});
+  if(madeBet){
+    console.log("found bet: "+madeBet.optionName);
+    return options.fn({text:madeBet.optionName});
+  }
+  else{
+    console.log ("Didnt find any betsz");
+    return options.inverse(this);
+  }
 }
 
 Template.start.events({

@@ -44,11 +44,18 @@
 	          <span>Place your bet:</span>
 	          <span>{{ amount }} B's</span>
 	          <ul class="button-group">
+	          	{{#ifMadeBet _id}}
+									<li>
+                  	<a type="button" class="button tiny placeBet" id="markedAsPlaced" data-option="{{text}}">{{text}}</a>
+									</li>
+							{{else}}
 							{{#each options}}
 								<li>
-                  <a type="button" class="button tiny placeBet" data-option="{{text}}">{{text}}</a>
+                  	<a type="button" class=" button tiny placeBet" data-option="{{text}}">{{text}}</a>
 								</li>
-		        	{{/each}}
+							{{/each}}
+		        	{{/ifMadeBet}}
+
 	        	</ul>
 	        </div>
         </div>
@@ -56,6 +63,8 @@
     </div>
 	{{/each}}
 </template>
+
+
 
 <template name="start">
 	<h3>Create a new betting pool!</h3>

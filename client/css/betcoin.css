@@ -13,3 +13,7 @@
 input.placeBet {
 	color: black;
 }
+
+#markedAsPlaced {
+	background-color: green;
+}
